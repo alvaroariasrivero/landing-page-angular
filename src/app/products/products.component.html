@@ -1,0 +1,32 @@
+<h1>Records store</h1>
+
+<table class="table">
+    <thead>
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col">Artist</th>
+        <th scope="col">Album</th>
+        <th scope="col">Handle</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <th scope="row">1</th>
+        <td>Iron Maiden</td>
+        <td>Iron Maiden</td>
+        <td><button class="btn btn-info"  [routerLink]="['/products', 'IronMaiden']">Detail</button></td>
+      </tr>
+      <tr>
+        <th scope="row">2</th>
+        <td>AC/DC</td>
+        <td>Highway to Hell</td>
+        <td><button class="btn btn-info" [routerLink]="['/products', 'HighwayToHell']">Detail</button></td>
+      </tr>
+      <tr>
+        <th scope="row">3</th>
+        <td>Motorhead</td>
+        <td>Ace of Spades</td>
+        <td><button class="btn btn-info" [routerLink]="['/products', 'AceOfSpades']">Detail</button></td>
+      </tr>
+    </tbody>
+  </table>
