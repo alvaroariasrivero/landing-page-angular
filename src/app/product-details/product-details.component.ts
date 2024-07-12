@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { productsList, Product } from '../products/products.mock';
 
 @Component({
   selector: 'app-product-details',
@@ -8,13 +9,14 @@ import { ActivatedRoute } from '@angular/router';
 })
 export class ProductDetailsComponent implements OnInit {
 
-  productTitle: string = "";
+  productsList: Product[] = productsList;
+  product?: Product;
 
   constructor(private _route: ActivatedRoute){}
 
   ngOnInit(): void {
       this._route.params.subscribe(params => {
-        this.productTitle = params['productId'];
+        this.product = productsList.find((element) => element.album === params['productId']);    
       });
   };
 
