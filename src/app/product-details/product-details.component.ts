@@ -21,7 +21,7 @@ export class ProductDetailsComponent implements OnInit {
       this._route.params.subscribe(params => {
       this.product = this.productsList.find((element) => element.id == params['productId']); 
       this.loading = false;
-      this.color = this.product?.price as number < 10 ? 'green' : 'blue'       
+      this.color = this.product?.price as number < 10 ? '#0bdb0b' : 'blue'       
     }), 1000);
   };
 

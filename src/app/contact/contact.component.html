@@ -1,1 +1,53 @@
-<p>contact works!</p>
+<!-- Template form -->
+
+<!-- <div class="container">
+    <form #templateForm="ngForm" (ngSubmit)="sendData()">
+        <div class="mb-3">
+            <label for="exampleInputPassword1" class="form-label">Name</label>
+            <input type="text" class="form-control" id="exampleInputName" [(ngModel)]="user.username" [ngModelOptions]="{standalone: true}" required>
+        </div>
+        <div class="mb-3">
+          <label for="exampleInputEmail1" class="form-label">Email address</label>
+          <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" [(ngModel)]="user.email" [ngModelOptions]="{standalone: true}" required>
+          <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div>
+        </div>
+        <div class="mb-3">
+          <label for="exampleInputPassword1" class="form-label">Password</label>
+          <input type="password" class="form-control" id="exampleInputPassword1" [(ngModel)]="user.password" [ngModelOptions]="{standalone: true}" required>
+        </div>
+        <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
+</div> -->
+
+<!-- Reactive form -->
+<div class="container">
+    <form [formGroup]="contactForm" (ngSubmit)="sendData()">
+        <div class="mb-3">
+            <label class="form-label">Select country:</label>
+            <select class="form-select" aria-label="Default select example" formControlName="country">
+                <option value="1">France</option>
+                <option value="2">UK</option>
+                <option value="3">Spain</option>
+            </select>
+        </div>
+        <div class="mb-3">
+            <label for="exampleInputPassword1" class="form-label">{{nameLabel}}</label>
+            <input [ngClass]="{'is-invalid': hasErrors('username', 'required')}" type="text" class="form-control" id="exampleInputName" formControlName="username" >
+            <div class="txt-danger" *ngIf="hasErrors('username', 'required')">Name is mandatory</div>
+            <div class="txt-danger" *ngIf="hasErrors('username', 'minlength')">Name must have at least three characters</div>
+        </div>
+        <div class="mb-3">
+          <label for="exampleInputEmail1" class="form-label">{{emailLabel}}</label>
+          <input [ngClass]="{'is-invalid': hasErrors('email', 'email') || hasErrors('email', 'required')}" type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" formControlName="email" >
+          <div class="txt-danger" *ngIf="hasErrors('email', 'email')">Email format not valid</div>
+          <div class="txt-danger" *ngIf="hasErrors('email', 'required')">Email is mandatory</div>
+          <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div>
+        </div>
+        <div class="mb-3">
+          <label for="exampleInputPassword1" class="form-label">{{passwordLabel}}</label>
+          <input [ngClass]="{'is-invalid': hasErrors('password', 'required')}" type="password" class="form-control" id="exampleInputPassword1" formControlName="password" >
+          <div class="txt-danger" *ngIf="hasErrors('password', 'required')">Password is mandatory</div>
+        </div>
+        <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
+</div>
