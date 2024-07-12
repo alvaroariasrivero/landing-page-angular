@@ -15,8 +15,8 @@
         <th scope="row">{{product.id}}</th>
         <td>{{product.artist}}</td>
         <td>{{product.album}}</td>
-        <td>{{ product.price | currency:'EUR':'symbol':'1.2-2' }}</td>
-        <td><button class="btn btn-info"  [routerLink]="['/products', product.album]">Detail</button></td>
+        <td [ngClass]="{'low-price': product.price < 10}">{{ product.price | currency:'EUR':'symbol':'1.2-2' }}</td>
+        <td><button class="btn btn-info"  [routerLink]="['/products', product.id]">Detail</button></td>
       </tr>
     </tbody>
   </table>

@@ -11,13 +11,18 @@ export class ProductDetailsComponent implements OnInit {
 
   productsList: Product[] = productsList;
   product?: Product;
+  loading: boolean = true;
+  color: string = '';
 
   constructor(private _route: ActivatedRoute){}
 
   ngOnInit(): void {
+    setTimeout(() => 
       this._route.params.subscribe(params => {
-        this.product = productsList.find((element) => element.album === params['productId']);    
-      });
+      this.product = this.productsList.find((element) => element.id == params['productId']); 
+      this.loading = false;
+      this.color = this.product?.price as number < 10 ? 'green' : 'blue'       
+    }), 1000);
   };
 
 }
