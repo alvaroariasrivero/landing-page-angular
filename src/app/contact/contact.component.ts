@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 @Component({
@@ -6,7 +6,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
   templateUrl: './contact.component.html',
   styleUrl: './contact.component.css'
 })
-export class ContactComponent implements OnInit {
+export class ContactComponent implements OnInit, OnDestroy {
 
   // Esto es para formulario de template
   // public user: any = {
@@ -45,8 +45,8 @@ export class ContactComponent implements OnInit {
     // this.contactForm.get('username')?.clearValidators();
     // this.contactForm.get('username')?.updateValueAndValidity();
     this.contactForm.patchValue({username: this.activeUser, email: this.activeEmail}) //Para setear varios
-    this.contactForm.get('username')?.disable()
-    this.contactForm.get('email')?.disable()
+    // this.contactForm.get('username')?.disable()
+    // this.contactForm.get('email')?.disable()
     this.contactForm.get('country')?.valueChanges.subscribe( value => {
       this.country = value
       if(this.country === "3"){
@@ -60,6 +60,11 @@ export class ContactComponent implements OnInit {
       }
       
     })
+  }
+
+  ngOnDestroy(): void {
+      console.log('Se destruyó el componente');
+      
   }
 
   sendData(){
