@@ -21,7 +21,7 @@ export class ContactComponent implements OnInit, OnDestroy {
 
   // Esto es para formulario reactivo
 
-  contactForm : FormGroup
+  contactForm: FormGroup;
   activeUser: string = 'DonJulio'
   activeEmail: string = 'folasfbkjfs@gmail.com'
   country: string = 'UK'
@@ -29,13 +29,13 @@ export class ContactComponent implements OnInit, OnDestroy {
   passwordLabel: string = 'Password'
   emailLabel: string = 'Email address'
 
-  constructor(private form: FormBuilder){
+  constructor(private form: FormBuilder) {
     this.contactForm = this.form.group({
       username: ['', [Validators.required, Validators.minLength(3)]],
       email: ['', [Validators.required, Validators.email]],
-      country: ['', Validators.required],
-      password: ['', Validators.required]
-    })
+      password: ['', Validators.required],
+      country: ['UK'] 
+    });
   }
 
   ngOnInit(): void {
@@ -49,22 +49,12 @@ export class ContactComponent implements OnInit, OnDestroy {
     // this.contactForm.get('email')?.disable()
     this.contactForm.get('country')?.valueChanges.subscribe( value => {
       this.country = value
-      if(this.country === "3"){
-        this.nameLabel = 'Nombre'
-        this.passwordLabel = 'Contraseña'
-        this.emailLabel = 'Dirección email'
-      }else{
-        this.nameLabel = 'Name'
-        this.passwordLabel = 'Password'
-        this.emailLabel = 'Email address'
-      }
-      
+      this.updateLabels()
     })
   }
 
   ngOnDestroy(): void {
-      console.log('Se destruyó el componente');
-      
+    console.log('Se destruyó el componente');
   }
 
   sendData(){
@@ -73,6 +63,18 @@ export class ContactComponent implements OnInit, OnDestroy {
 
   hasErrors(controlName: string, errorType: string){
     return this.contactForm.get(controlName)?.hasError(errorType) && this.contactForm.get(controlName)?.touched
+  }
+
+  updateLabels(): void {
+    if (this.country === "3") {
+      this.nameLabel = 'Nombre';
+      this.passwordLabel = 'Contraseña';
+      this.emailLabel = 'Dirección email';
+    } else {
+      this.nameLabel = 'Name';
+      this.passwordLabel = 'Password';
+      this.emailLabel = 'Email address';
+    }
   }
 
 }
