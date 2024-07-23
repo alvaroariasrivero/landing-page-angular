@@ -2,8 +2,9 @@
  <h2>Loading...</h2>
 </ng-container>
 <ng-container *ngIf="!loading">
-    <h1>{{product?.album}}</h1>
-    <h3>Artist: {{product?.artist}}</h3>
-    <p *ngIf="product?.info">{{product?.info}}</p>
+    <h1>{{product?.title}}</h1>
+    <h3>Category: {{product?.category}}</h3>
+    <p *ngIf="product?.description">{{product?.description}}</p>
+    <img [src]="product?.image" [alt]="product?.description">
     <p [ngStyle]="{'color': color}">Price: {{ product?.price| currency:'EUR':'symbol':'1.2-2' }}</p>
 </ng-container>
