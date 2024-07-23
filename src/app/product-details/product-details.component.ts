@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Params } from '@angular/router';
 import { iProduct } from '../models/product.model';
 import { GetProductsService } from '../services/get-products.service';
 // import { productsList, Product } from '../products/products.mock'; //Lista falseada
@@ -12,10 +12,10 @@ import { ProductsComponent } from '../products/products.component';
 })
 export class ProductDetailsComponent implements OnInit {
 
-  productsList: iProduct[] = [];
   product?: iProduct;
   loading: boolean = true;
   color: string = '';
+  errorMessage: string | undefined;
 
   constructor(
     private _route: ActivatedRoute,
@@ -32,13 +32,20 @@ export class ProductDetailsComponent implements OnInit {
   // };
 
   ngOnInit(): void {
-      this._route.params.subscribe(params => {
-        this._apiService.getProductById(Number(params['productId'])).subscribe((data: iProduct) => {
-          this.product = data
-          this.color = this.product?.price as number < 10 ? '#0bdb0b' : 'blue'
+    this._route.params.subscribe((params: Params) => {
+      this._apiService.getProductById(Number(params['productId'])).subscribe(
+        (data: iProduct) => {
+          this.product = data;
+          this.color = this.product?.price < 10 ? '#0bdb0b' : 'blue';
           this.loading = false;
-        })
-      })
+        },
+        (error) => {
+          this.errorMessage = 'An error occurred while fetching the product';
+          console.error('Error fetching product:', error);
+          this.loading = false;
+        }
+      )
+    })
   }
 
 }
