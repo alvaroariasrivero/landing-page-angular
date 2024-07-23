@@ -4,8 +4,8 @@
     <thead>
       <tr>
         <th scope="col">#</th>
-        <th scope="col">Artist</th>
-        <th scope="col">Album</th>
+        <th scope="col">Title</th>
+        <th scope="col">Category</th>
         <th scope="col">Price</th>
         <th scope="col">Handle</th>
       </tr>
@@ -13,8 +13,8 @@
     <tbody>
       <tr *ngFor="let product of productsList">
         <th scope="row">{{product.id}}</th>
-        <td>{{product.artist}}</td>
-        <td>{{product.album}}</td>
+        <td>{{product.title}}</td>
+        <td>{{product.category}}</td>
         <td [ngClass]="{'low-price': product.price < 10}">{{ product.price | currency:'EUR':'symbol':'1.2-2' }}</td>
         <td><button class="btn btn-info"  [routerLink]="['/products', product.id]">Detail</button></td>
       </tr>
