@@ -35,8 +35,6 @@ export class ProductDetailsComponent implements OnInit {
       this._route.params.subscribe(params => {
         this._apiService.getProductById(Number(params['productId'])).subscribe((data: iProduct) => {
           this.product = data
-          console.log(data);
-          
           this.color = this.product?.price as number < 10 ? '#0bdb0b' : 'blue'
           this.loading = false;
         })
