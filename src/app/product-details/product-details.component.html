@@ -6,7 +6,7 @@
     <div class="card" style="width: 18rem;">
         <img [src]="product?.image" [alt]="product?.description" class="card-img-top">
         <div class="card-body">
-          <h5 class="card-title">{{product?.title}}</h5>
+          <h5 class="card-title">{{product?.title | uppercase}}</h5>
           <p class="card-text" *ngIf="product?.description">{{product?.description}}</p>
           <p [ngStyle]="{'color': color}">Price: {{ product?.price| currency:'EUR':'symbol':'1.2-2' }}</p>
         </div>
