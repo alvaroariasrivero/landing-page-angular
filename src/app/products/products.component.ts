@@ -11,13 +11,27 @@ import { GetProductsService } from '../services/get-products.service';
 export class ProductsComponent implements OnInit {
   // productsList = productsList;
 
-  productsList: iProduct[] = [];
+  productsList: iProduct[] = []
+  sort: string = ''
 
   constructor(private _apiService: GetProductsService){}
 
   ngOnInit(): void {
-      this._apiService.getProducts().subscribe((data:iProduct[]) => {
-        this.productsList = data
-      })
+    this.loadProducts()
+  }
+
+  loadProducts(): void {
+    this._apiService.getProducts(this.sort).subscribe((data: iProduct[]) => {
+      this.productsList = data;
+    })
+  }
+
+  sortProducts(){
+    if(this.sort === '' || this.sort === 'asc'){
+      this.sort = 'desc'
+    }else{
+      this.sort = 'asc'
+    }
+    this.loadProducts()
   }
 }
